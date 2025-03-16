@@ -1,4 +1,4 @@
-name: Java CI with Gradle
+name: Java CI/CD with Gradle
 
 # 동작 조건 설정 : main 브랜치에 push가 발생할 경우 동작한다.
 on:
@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 jobs:
-  # Spring Boot 애플리케이션을 빌드하여 도커허브에 푸시하는 과정
+  # Spring Boot 애플리케이션을 빌드하여 도커허브에 푸시
   build-docker-image:
     runs-on: ubuntu-latest
     steps:
@@ -45,6 +45,7 @@ jobs:
     # 5. Docker Hub 이미지 푸시
     - name: docker Hub push
       run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/github-actions-demo
+
 
   # 위 과정에서 푸시한 이미지를 ec2에서 풀받아서 실행시키는 과정 
   run-docker-image-on-ec2:
